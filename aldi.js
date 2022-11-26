@@ -18,7 +18,7 @@ async function aldiBeers() {
     page.setDefaultNavigationTimeout(0)
     // await page.setRequestInterception(true)
     await page.goto('https://groceries.aldi.co.uk/en-GB/')
-    await page.goto('https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146', { timeout: 0, waitUntil: 'load', });
+    await page.goto('https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146');
     let resolve;
     page.on('response', async response => {
         if (resolve && response.url() === 'https://groceries.aldi.co.uk/api/product/calculatePrices') {
