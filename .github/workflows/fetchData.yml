@@ -42,9 +42,9 @@ jobs:
           node index.js
       - name: Commit and push changes
         uses: devops-infra/action-commit-push@master
-      with:
-        github_token: "${{ secrets.GIT_TOKEN }}"
-        add_timestamp: true
-        commit_prefix: "[AUTO]"
-        commit_message: "Automatic commit"
-        force: false
+        with:
+          github_token: "${{ secrets.GIT_TOKEN }}"
+          add_timestamp: true
+          commit_prefix: "[AUTO]"
+          commit_message: "Automatic commit"
+          force: false
