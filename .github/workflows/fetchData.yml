@@ -17,7 +17,7 @@ env:
   TZ: Asia/Shanghai
 jobs:
   change-and-push:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       ALDICOOKIE: ${{ secrets.ALDICOOKIE }}
     steps:
