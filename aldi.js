@@ -1,5 +1,6 @@
 import axios from "axios"
 import { CreatData } from "./result.js"
+import puppeteer from 'puppeteer';
 async function aldiBeers() {
 
 
@@ -7,51 +8,30 @@ async function aldiBeers() {
         method: 'get',
         url: 'https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146',
         headers: {
+            "Cookie": ""
         }
     };
 
-    let cookie;
-    try {
-        let d = await axios(config)
-        cookie = d.response.headers['set-cookie'];
-    } catch (error) {
-        cookie = error.response.headers['set-cookie'];
-    }
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36")
+    await page.goto('https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146');
+    await page.waitForSelector('#onetrust-accept-btn-handler', { timeout: 10000 })
+    await page.click('#onetrust-accept-btn-handler', { delay: 3000 })
 
+    await page.waitForSelector('.product-price', { timeout: 10000 })
+    const searchValue = await page.$eval('.product-price', el => el.outerHTML);
 
-    // aldi params
-    // ProductPrices -> IsPriceDiscounted DefaultListPrice ListPrice
-    var data = JSON.stringify({
-        "products": [
-            "5028403155146"
-        ]
-    });
-    var config = {
-        method: 'post',
-        baseURL: "",
-        url: 'https://groceries.aldi.co.uk/api/product/calculatePrices',
-        headers: {
-            'referer': 'https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146',
-            'origin': 'https://groceries.aldi.co.uk',
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
-            'x-requested-with': 'XMLHttpRequest',
-            'accept-language': 'en-GB',
-            'Content-Type': 'application/json',
-            'Cookie': cookie,
-        },
-        data: data
-    };
-    let _tmpResult
-    try {
-        _tmpResult = await axios(config)
-    }
-    catch (error) {
-        console.log(error);
-    };
+    const re = /\-bold\">(.*)<\/span/i;
+    const str = re.exec(searchValue);
+    let _currentPrice = str[1]
+
+    console.log(_currentPrice)
+    await browser.close();
     let _data = CreatData()
-    _data.IsPriceDiscounted = _tmpResult.data.ProductPrices[0].IsPriceDiscounted
-    _data.ListPrice = _tmpResult.data.ProductPrices[0].ListPrice
-    _data.DefaultListPrice = _tmpResult.data.ProductPrices[0].DefaultListPrice
+    _data.IsPriceDiscounted = false
+    _data.ListPrice = _currentPrice
+    _data.DefaultListPrice = "£1.59"
     return _data;
 }
 
