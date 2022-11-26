@@ -32,7 +32,6 @@ jobs:
       # - name: "运行 啤酒信息"
       #   run: 
       #     node index.js
-jobs:
   change-and-push:
     runs-on: ubuntu-latest
     steps:
