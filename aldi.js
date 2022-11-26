@@ -12,8 +12,8 @@ async function aldiBeers() {
 
     let cookie;
     try {
-        await axios(config)
-
+        let d = await axios(config)
+        cookie = d.response.headers['set-cookie'];
     } catch (error) {
         cookie = error.response.headers['set-cookie'];
     }
@@ -46,7 +46,7 @@ async function aldiBeers() {
         _tmpResult = await axios(config)
     }
     catch (error) {
-        // console.log(error);
+        console.log(error);
     };
     let _data = CreatData()
     _data.IsPriceDiscounted = _tmpResult.data.ProductPrices[0].IsPriceDiscounted
