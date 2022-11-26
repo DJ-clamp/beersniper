@@ -36,10 +36,10 @@ async function aldiBeers() {
     // console.log(_currentPrice)
     await browser.close();
     let _data = CreatData()
-    _data.IsPriceDiscounted = _tmpResult.data.ProductPrices[0].IsPriceDiscounted
-    _data.ProductPrice = _tmpResult.data.ProductPrices[0].ListPrice
-    _data.ListPrice = _tmpResult.data.ProductPrices[0].ListPrice
-    _data.DefaultListPrice = _tmpResult.data.ProductPrices[0].DefaultListPrice
+    _data.IsPriceDiscounted = output.ProductPrices[0].IsPriceDiscounted
+    _data.ProductPrice = output.ProductPrices[0].ListPrice
+    _data.ListPrice = output.ProductPrices[0].ListPrice
+    _data.DefaultListPrice = output.ProductPrices[0].DefaultListPrice
     return _data;
 }
 
