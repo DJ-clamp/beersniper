@@ -44,10 +44,9 @@ jobs:
         #   PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
         with:
           node-version: 18.x
-          args: install
-      # - name: npm install
-      #   run: |
-      #     npm install
+      - name: npm install
+        run: |
+          npm install
       - name: "运行 啤酒信息"
         run: 
           node index.js       
