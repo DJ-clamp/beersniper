@@ -15,13 +15,15 @@ async function aldiBeers() {
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36")
+    await page.goto('https://groceries.aldi.co.uk/en-GB/')
     await page.goto('https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146', { timeout: 0 });
     try {
         await page.waitForSelector('#onetrust-accept-btn-handler')
+        await page.click('#onetrust-accept-btn-handler', { delay: 3000 })
     } catch (error) {
         console.log(error)
     }
-    await page.click('#onetrust-accept-btn-handler', { delay: 3000 })
+
 
     await page.waitForSelector('.product-price')
     const searchValue = await page.$eval('.product-price', el => el.outerHTML);
