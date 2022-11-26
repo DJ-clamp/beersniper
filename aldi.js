@@ -28,26 +28,26 @@ async function aldiBeers() {
     var promise = new Promise(x => resolve = x);
     var output = await promise;
     console.log(output);
-    try {
-        await page.waitForSelector('#onetrust-accept-btn-handler', { delay: 30000 })
-        await page.click('#onetrust-accept-btn-handler', { delay: 30000 })
-    } catch (error) {
-        console.log(error)
-    }
+    // try {
+    //     await page.waitForSelector('#onetrust-accept-btn-handler', { delay: 30000 })
+    //     await page.click('#onetrust-accept-btn-handler', { delay: 30000 })
+    // } catch (error) {
+    //     console.log(error)
+    // }
 
 
-    await page.waitForSelector('.product-price', { delay: 30000 })
-    const searchValue = await page.$eval('.product-price', el => el.outerHTML);
+    // await page.waitForSelector('.product-price', { delay: 30000 })
+    // const searchValue = await page.$eval('.product-price', el => el.outerHTML);
 
-    const re = /\-bold\">(.*)<\/span/i;
-    const str = re.exec(searchValue);
-    let _currentPrice = str[1]
+    // const re = /\-bold\">(.*)<\/span/i;
+    // const str = re.exec(searchValue);
+    // let _currentPrice = str[1]
 
-    console.log(_currentPrice)
+    // console.log(_currentPrice)
     await browser.close();
     let _data = CreatData()
     _data.IsPriceDiscounted = false
-    _data.ProductPrice = _currentPrice
+    // _data.ProductPrice = _currentPrice
     _data.DefaultListPrice = "£1.59"
     return _data;
 }
