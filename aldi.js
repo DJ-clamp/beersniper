@@ -37,7 +37,7 @@ async function aldiBeers() {
     await browser.close();
     let _data = CreatData()
     _data.IsPriceDiscounted = false
-    _data.ListPrice = _currentPrice
+    _data.ProductPrice = _currentPrice
     _data.DefaultListPrice = "£1.59"
     return _data;
 }

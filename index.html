@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./docs/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+    <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-5 sm:px-6">
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Beer Sniper 🍻</h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">Searching beers info of price in anywhere.</p>
+        </div>
+        <div class="border-t border-purple-200">
+            <dl>
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 beer-title">Aldi</dt>
+                    <div class="flex justify-between">
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Proper Job Cornish IPA 500ml</dd>
+                        <span class="text-sm font-medium text-gray-900 underline
+                                underline-offset-2 beer-price"></span>
+                    </div>
+                </div>
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 beer-title">Tesco</dt>
+                    <div class="flex justify-between">
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Proper Job Cornish IPA 500ml</dd>
+                        <span class="text-sm font-medium text-gray-900 underline
+                                underline-offset-2 beer-price"></span>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500 beer-title">ASDA</dt>
+                    <div class="flex justify-between">
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Proper Job Cornish IPA 500ml</dd>
+                        <span class="text-sm font-medium text-gray-900 underline
+                                underline-offset-2 beer-price"></span>
+                    </div>
+                </div>
+                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">M&S</dt>
+                    <div class="flex justify-between">
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Proper Job Cornish IPA 500ml</dd>
+                        <span class="text-sm font-medium text-gray-900 underline
+                                underline-offset-2 beer-price"></span>
+                    </div>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript">
+    async function printJSON() {
+        const response = await fetch("data.json");
+        const json = await response.json();
+        ;
+        return json
+    }
+    let items = $(".beer-title")
+    let prices = $(".beer-price")
+    printJSON().then(response => {
+        response.forEach((element, index) => {
+            items[index].innerHTML = element.Shop.toUpperCase()
+            let price = element.ProductPrice.toString()
+            price = price || 'not fetch yet'
+            if (price.indexOf("£") <= -1) {
+                price = "£ " + price
+            }
+            prices[index].innerText = price
+        });
+    })
+</script>
+
+</html>

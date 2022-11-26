@@ -25,5 +25,8 @@
     "puppeteer": "^19.3.0",
     "request": "^2.88.2"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
 }
