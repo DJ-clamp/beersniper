@@ -33,6 +33,8 @@ jobs:
   #         node index.js
   change-and-push:
     runs-on: ubuntu-latest
+    env:
+      ALDICOOKIE: ${{ secrets.ALDICOOKIE }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
