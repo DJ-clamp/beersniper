@@ -1,1 +1,16 @@
-[{"Shop":"aldi","BeerName":"Proper Job Cornish IPA 500ml","ProductPrice":"£1.59","DefaultListPrice":"£1.59","IsPriceDiscounted":false},{"Shop":"Tesco","BeerName":"Proper Job Cornish IPA 500ml","ProductPrice":1.59,"DefaultListPrice":1.59,"IsPriceDiscounted":false}]
+[
+    {
+        "Shop": "aldi",
+        "BeerName": "Proper Job Cornish IPA 500ml",
+        "ProductPrice": "£1.59",
+        "DefaultListPrice": "£1.59",
+        "IsPriceDiscounted": false
+    },
+    {
+        "Shop": "Tesco",
+        "BeerName": "Proper Job Cornish IPA 500ml",
+        "ProductPrice": 1.59,
+        "DefaultListPrice": 1.59,
+        "IsPriceDiscounted": false
+    }
+]
