@@ -43,3 +43,4 @@ jobs:
           commit_prefix: "[AUTO]"
           commit_message: "Automatic commit"
           force: false
+          target_branch: "pages"
