@@ -1,8 +1,26 @@
 import axios from "axios"
 import { CreatData } from "./result.js"
 async function aldiBeers() {
+
+
+    var config = {
+        method: 'get',
+        url: 'https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146',
+        headers: {
+        }
+    };
+
+    let cookie;
+    try {
+        await axios(config)
+
+    } catch (error) {
+        cookie = error.response.headers['set-cookie'];
+    }
+
+
     // aldi params
-    // ProductPrices-> IsPriceDiscounted DefaultListPrice ListPrice
+    // ProductPrices -> IsPriceDiscounted DefaultListPrice ListPrice
     var data = JSON.stringify({
         "products": [
             "5028403155146"
@@ -19,7 +37,7 @@ async function aldiBeers() {
             'x-requested-with': 'XMLHttpRequest',
             'accept-language': 'en-GB',
             'Content-Type': 'application/json',
-            'Cookie': process.env.ALDICOOKIE,
+            'Cookie': cookie,
         },
         data: data
     };
@@ -28,7 +46,7 @@ async function aldiBeers() {
         _tmpResult = await axios(config)
     }
     catch (error) {
-        console.log(error);
+        // console.log(error);
     };
     let _data = CreatData()
     _data.IsPriceDiscounted = _tmpResult.data.ProductPrices[0].IsPriceDiscounted
