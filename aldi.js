@@ -16,8 +16,18 @@ async function aldiBeers() {
     const page = await browser.newPage();
     page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36")
     page.setDefaultNavigationTimeout(0)
+    // await page.setRequestInterception(true)
     await page.goto('https://groceries.aldi.co.uk/en-GB/')
     await page.goto('https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146', { timeout: 0, waitUntil: 'load', });
+    let resolve;
+    page.on('response', async response => {
+        if (resolve && response.url() === 'https://groceries.aldi.co.uk/api/product/calculatePrices') {
+            resolve(await response.json());
+        }
+    });
+    var promise = new Promise(x => resolve = x);
+    var output = await promise;
+    console.log(output);
     try {
         await page.waitForSelector('#onetrust-accept-btn-handler', { delay: 30000 })
         await page.click('#onetrust-accept-btn-handler', { delay: 30000 })
