@@ -6,7 +6,7 @@ async function aldiBeers() {
     const page = await browser.newPage();
     page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36")
     page.setDefaultNavigationTimeout(0)
-    // await page.setRequestInterception(true)
+    // await page.setRequestInterception(true) //must be have proxy
     await page.goto('https://groceries.aldi.co.uk/en-GB/')
     await page.goto('https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146');
     let resolve;

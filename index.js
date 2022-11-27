@@ -1,13 +1,19 @@
 import { aldiBeers } from "./aldi.js";
 import { tescoBeers } from "./tesco.js";
+import { asdaBeers } from './asda.js';
 import fs from 'fs'
 let result = []
 
 let price1 = await aldiBeers()
 result.push(price1)
+
 let price2 = await tescoBeers()
 result.push(price2)
+
+let price3 = await asdaBeers()
+result.push(price3)
 console.log(result)
+
 const storeData = (data, path) => {
     try {
         fs.writeFileSync(path, JSON.stringify(data))
