@@ -15,7 +15,7 @@ async function asdaBeers() {
     let prmotion = []
     try {
         await page.waitForSelector('.product-detail-page__linksave-sticker', { delay: 10000 })
-        await page.screenshot({ path: './image.png', type: 'png' })
+        // await page.screenshot({ path: './image.png', type: 'png' })
         const prmotionHTML = await page.$eval('.link-save-banner-large__meat-sticker', el => el.outerHTML);
         const re = /\d/g;
         let e
@@ -46,5 +46,6 @@ async function asdaBeers() {
     _data.IsPriceDiscounted = true
     _data.ProductPrice = _currentPrice + `${_totolNum} for ${_purchesedNum} [${_realPrice}]`
     _data.DefaultListPrice = "1.59"
+    return _data
 }
 export { asdaBeers }

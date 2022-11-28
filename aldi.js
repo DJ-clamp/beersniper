@@ -2,19 +2,25 @@ import axios from "axios"
 import { CreatData } from "./result.js"
 import puppeteer from 'puppeteer';
 async function aldiBeers() {
-    const browser = await puppeteer.launch({ headless: true, ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox',] });
+    const username = '';
+    const password = '';
+    const browser = await puppeteer.launch({ headless: true, ignoreDefaultArgs: ['--disable-extensions'], args: ['--no-sandbox', '--proxy-server=socks5://192.168.2.1:7891'] });
     const page = await browser.newPage();
-    page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36")
+    await page.authenticate({
+        username,
+        password,
+    });
+    await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36")
     page.setDefaultNavigationTimeout(0)
     // await page.setRequestInterception(true) //must be have proxy
     await page.goto('https://groceries.aldi.co.uk/en-GB/')
     await page.goto('https://groceries.aldi.co.uk/en-GB/p-proper-job-cornish-ipa-500ml/5028403155146');
-    try {
-        await page.waitForSelector('#onetrust-accept-btn-handler', { delay: 30000 })
-        await page.click('#onetrust-accept-btn-handler', { delay: 30000 })
-    } catch (error) {
-        console.log(error)
-    }
+    // try {
+    //     await page.waitForSelector('#onetrust-accept-btn-handler', { delay: 30000 })
+    //     await page.click('#onetrust-accept-btn-handler', { delay: 30000 })
+    // } catch (error) {
+    //     console.log(error)
+    // }
     let resolve;
     page.on('response', async response => {
         if (resolve && response.url() === 'https://groceries.aldi.co.uk/api/product/calculatePrices') {
