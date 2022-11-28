@@ -44,7 +44,7 @@ async function asdaBeers() {
     let _data = CreatData()
     _data.Shop = "ASDA"
     _data.IsPriceDiscounted = true
-    _data.ProductPrice = _currentPrice + `${_totolNum} for ${_purchesedNum} [${_realPrice}]`
+    _data.ProductPrice = _currentPrice + ` ${_totolNum} for ${_purchesedNum} [${_realPrice}]`
     _data.DefaultListPrice = "1.59"
     return _data
 }
