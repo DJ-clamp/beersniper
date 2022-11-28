@@ -24,7 +24,10 @@ async function aldiBeers() {
     let resolve;
     page.on('response', async response => {
         if (resolve && response.url() === 'https://groceries.aldi.co.uk/api/product/calculatePrices') {
-            resolve(await response.json());
+            let data = await response.json()
+            if (data.ProductPrices[0].ProductId == "5028403155146") {
+                resolve(await response.json());
+            }
         }
     });
     var promise = new Promise(x => resolve = x);
